@@ -7,11 +7,18 @@ android {
     namespace 'io.github.edsuns.adblockclient'
     compileSdkVersion 36
 
+
     defaultConfig {
         minSdkVersion 23
         targetSdkVersion 36
-        versionCode 1
-        versionName "1.0"
+
+        externalNativeBuild {
+            cmake {
+                // Incorrect: Missing the '-D' prefix
+                arguments 'DANDROID_STL=c++_shared'
+                cppFlags "-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON"
+            }
+        }
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -24,10 +31,11 @@ android {
         }
     }
 
+    ndkVersion "29.0.14206865"
     externalNativeBuild {
         cmake {
             path "CMakeLists.txt"
-            version "3.22.1"
+            version "4.1.2"
         }
     }
 
@@ -47,7 +55,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:2.2.0"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:2.2.21"
     implementation 'androidx.core:core-ktx:1.17.0'
     implementation 'androidx.appcompat:appcompat:1.7.1'
     testImplementation 'junit:junit:4.13.2'
