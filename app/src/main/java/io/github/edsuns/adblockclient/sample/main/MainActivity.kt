@@ -24,6 +24,8 @@ import io.github.edsuns.adfilter.AdFilter
 import io.github.edsuns.adfilter.FilterResult
 import io.github.edsuns.adfilter.FilterViewModel
 import io.github.edsuns.smoothprogress.SmoothProgressAnimator
+import android.app.PendingIntent
+import androidx.activity.OnBackPressedCallback
 
 class MainActivity : AppCompatActivity(), WebViewClientListener {
 
@@ -45,12 +47,12 @@ class MainActivity : AppCompatActivity(), WebViewClientListener {
 
         val filter = AdFilter.get()
         filterViewModel = filter.viewModel
-
+        val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
         val popupMenu = PopupMenu(
             this,
             binding.menuButton,
             Gravity.NO_GRAVITY,
-            R.attr.actionOverflowMenuStyle,
+            android.R.attr.actionOverflowMenuStyle,
             0
         )
         popupMenu.inflate(R.menu.menu_main)
@@ -181,6 +183,19 @@ class MainActivity : AppCompatActivity(), WebViewClientListener {
                 }
                 .show()
         }
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (webView.canGoBack()) {
+                    webView.goBack()
+                } else {
+                    // If the WebView cannot go back, disable this callback
+                    // and let the default back press behavior (finishing the activity) take over.
+                    isEnabled = false
+                    onBackPressed()
+                }
+            }
+        })
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -241,13 +256,6 @@ class MainActivity : AppCompatActivity(), WebViewClientListener {
         viewModel.logRequest(result)
     }
 
-    override fun onBackPressed() {
-        if (webView.canGoBack()) {
-            webView.goBack()
-            return
-        }
-        super.onBackPressed()
-    }
 
     companion object {
         const val KEY_WEB_VIEW = "KEY_WEB_VIEW"
