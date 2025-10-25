@@ -1,8 +1,7 @@
 # AdblockAndroid
 
-[![](https://jitpack.io/v/Edsuns/AdblockAndroid.svg)](https://jitpack.io/#Edsuns/AdblockAndroid)
+[![](https://jitpack.io/v/AS-LC/AdblockAndroidSupportAndoid16.svg)](https://jitpack.io/#AS-LC/AdblockAndroidSupportAndoid16)
 
-*English | [简体中文](README.zh-cn.md)*
 
 A lightweight and efficient adblock engine library for Android, which has strong compatibility for filters like [EasyList](https://easylist.to/) and [AdGuard Filters](https://kb.adguard.com/en/general/how-to-create-your-own-ad-filters).
 
@@ -30,7 +29,7 @@ The native C++ code is based on [brave/ad-block](https://github.com/brave/ad-blo
 
 ## Demo
 
-See [releases](https://github.com/Edsuns/AdblockAndroid/releases) and the code in `app/src`.
+See [releases](https://github.com/AS-LC/AdblockAndroidSupportAndoid16/releases) and the code in `app/src`.
 
 ## Get Started
 

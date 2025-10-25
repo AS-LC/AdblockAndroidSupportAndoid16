@@ -15,7 +15,7 @@ android {
         externalNativeBuild {
             cmake {
                 // Incorrect: Missing the '-D' prefix
-                arguments 'DANDROID_STL=c++_shared'
+                arguments '-DANDROID_STL=c++_shared'
                 cppFlags "-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON"
             }
         }
@@ -35,7 +35,7 @@ android {
     externalNativeBuild {
         cmake {
             path "CMakeLists.txt"
-            version "4.1.2"
+            version "3.22.1"
         }
     }
 
